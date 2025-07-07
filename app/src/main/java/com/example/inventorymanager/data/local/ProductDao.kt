@@ -7,7 +7,7 @@ import com.example.inventorymanager.data.model.Product
 @Dao
 interface ProductDao {
 
-    @Query("SELECT * FROM products WHERE isFavorite = 1")
+    @Query("SELECT * FROM products")
     fun getFavoriteProducts(): LiveData<List<Product>>
 
     @Query("SELECT * FROM products WHERE id = :id")
