@@ -1,19 +1,19 @@
-package com.example.inventorymanager.ui.main
+package com.example.inventorymanager.ui.product
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.inventorymanager.R
-import com.example.inventorymanager.databinding.ActivityMainBinding
+import com.example.inventorymanager.databinding.ActivityProductBinding
 
-class MainActivity : AppCompatActivity() {
+class ProductActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityProductBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupNavigation()

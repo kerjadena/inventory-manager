@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
+
+    <!-- Navigation -->
+    <string name="nav_products">Products</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_favorites">Favorites</string>
+
+    <!-- Product List -->
+    <string name="products_title">Products</string>
+    <string name="no_products_found">No products found</string>
+    <string name="loading_products">Loading products...</string>
+    <string name="refresh_products">Pull to refresh</string>
+
+    <!-- Product Detail -->
+    <string name="product_details">Product Details</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="remove_from_favorites">Remove from Favorites</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="stock_format">Stock: %d</string>
+    <string name="rating_format">⭐ %.1f</string>
+    <string name="discount_format">%.1f%% OFF</string>
+
+    <!-- Search -->
+    <string name="search_products">Search products...</string>
+    <string name="search_hint">Type to search products</string>
+    <string name="clear_search">Clear</string>
+    <string name="no_search_results">No search results found</string>
+
+    <!-- Categories -->
+    <string name="categories_title">Categories</string>
+    <string name="no_categories_found">No categories found</string>
+
+    <!-- Add/Edit Product -->
+    <string name="add_product">Add Product</string>
+    <string name="edit_product_title">Edit Product</string>
+    <string name="product_title">Title</string>
+    <string name="product_description">Description</string>
+    <string name="product_price">Price</string>
+    <string name="product_brand">Brand</string>
+    <string name="product_category">Category</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="reset">Reset</string>
+    <string name="product_added_successfully">Product added successfully!</string>
+    <string name="product_updated_successfully">Product updated successfully!</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Favorite Products</string>
+    <string name="no_favorites_found">No favorite products found</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+
+    <!-- Error Messages -->
+    <string name="error_network">Network error occurred</string>
+    <string name="error_loading_data">Failed to load data</string>
+    <string name="error_invalid_price">Please enter a valid price</string>
+    <string name="error_required_field">This field is required</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_product_image">Product image</string>
+    <string name="cd_favorite_button">Favorite button</string>
+    <string name="cd_back_button">Back button</string>
+    <string name="cd_add_product">Add product</string>
+    <string name="cd_app_logo">App logo</string>
 </resources>

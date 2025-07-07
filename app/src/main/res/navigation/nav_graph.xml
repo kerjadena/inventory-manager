@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productListFragment">
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.inventorymanager.ui.productlist.ProductListFragment"
+        android:label="@string/products_title"
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/action_productList_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productList_to_productAdd"
+            app:destination="@id/productAddFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.inventorymanager.ui.productdetail.ProductDetailFragment"
+        android:label="@string/product_details"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_productDetail_to_productEdit"
+            app:destination="@id/productEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.inventorymanager.ui.categorylist.CategoryListFragment"
+        android:label="@string/categories_title"
+        tools:layout="@layout/fragment_category_list">
+        <action
+            android:id="@+id/action_categoryList_to_productByCategory"
+            app:destination="@id/productByCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productByCategoryFragment"
+        android:name="com.example.inventorymanager.ui.productbycategory.ProductByCategoryFragment"
+        android:label="Category Products"
+        tools:layout="@layout/fragment_product_by_category">
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productByCategory_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productSearchFragment"
+        android:name="com.example.inventorymanager.ui.productsearch.ProductSearchFragment"
+        android:label="@string/nav_search"
+        tools:layout="@layout/fragment_product_search">
+        <action
+            android:id="@+id/action_productSearch_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteProductFragment"
+        android:name="com.example.inventorymanager.ui.favoriteproduct.FavoriteProductFragment"
+        android:label="@string/favorites_title"
+        tools:layout="@layout/fragment_favorite_product">
+        <action
+            android:id="@+id/action_favoriteProduct_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productAddFragment"
+        android:name="com.example.inventorymanager.ui.productadd.ProductAddFragment"
+        android:label="@string/add_product"
+        tools:layout="@layout/fragment_product_add" />
+
+    <fragment
+        android:id="@+id/productEditFragment"
+        android:name="com.example.inventorymanager.ui.productedit.ProductEditFragment"
+        android:label="@string/edit_product_title"
+        tools:layout="@layout/fragment_product_edit">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
