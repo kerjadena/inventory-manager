@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.repository.ProductRepository
 import kotlinx.coroutines.launch
 
@@ -11,8 +12,8 @@ class CategoryListViewModel : ViewModel() {
 
     private lateinit var repository: ProductRepository
 
-    private val _categories = MutableLiveData<List<String>>()
-    val categories: LiveData<List<String>> = _categories
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>> = _categories
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

@@ -1,6 +1,7 @@
 package com.example.inventorymanager.data.api
 
 import com.example.inventorymanager.data.model.AddProductRequest
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.model.Product
 import com.example.inventorymanager.data.model.ProductResponse
 import com.example.inventorymanager.data.model.UpdateProductRequest
@@ -19,7 +20,7 @@ interface ApiService {
     suspend fun getProductById(@Path("id") id: Int): Response<Product>
 
     @GET("products/categories")
-    suspend fun getCategories(): Response<List<String>>
+    suspend fun getCategories(): Response<List<Category>>
 
     @GET("products/category/{category}")
     suspend fun getProductsByCategory(@Path("category") category: String): Response<ProductResponse>

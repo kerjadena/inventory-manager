@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.inventorymanager.R
 import com.example.inventorymanager.data.local.ProductDatabase
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.network.NetworkModule
 import com.example.inventorymanager.data.repository.ProductRepository
 import com.example.inventorymanager.databinding.FragmentProductAddBinding
@@ -92,11 +93,12 @@ class ProductAddFragment : Fragment() {
         }
     }
 
-    private fun setupCategorySpinner(categories: List<String>) {
+    private fun setupCategorySpinner(categories: List<Category>) {
+        val categoryNames = categories.map { it.name }
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            categories
+            categoryNames
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = adapter
@@ -108,7 +110,12 @@ class ProductAddFragment : Fragment() {
             val description = editDescription.text.toString()
             val price = editPrice.text.toString()
             val brand = editBrand.text.toString()
-            val category = spinnerCategory.selectedItem?.toString() ?: ""
+            val selectedPosition = spinnerCategory.selectedItemPosition
+            val category = if (selectedPosition >= 0 && viewModel.categories.value != null) {
+                viewModel.categories.value!![selectedPosition].slug
+            } else {
+                ""
+            }
 
             viewModel.addProduct(title, description, price, brand, category)
         }

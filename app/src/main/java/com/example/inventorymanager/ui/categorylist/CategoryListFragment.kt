@@ -54,7 +54,7 @@ class CategoryListFragment : Fragment() {
             // Simple navigation without Safe Args for now
             findNavController().navigate(
                 com.example.inventorymanager.R.id.action_categoryList_to_productByCategory,
-                Bundle().apply { putString("category", category) }
+                Bundle().apply { putString("category", category.slug) }
             )
         }
 

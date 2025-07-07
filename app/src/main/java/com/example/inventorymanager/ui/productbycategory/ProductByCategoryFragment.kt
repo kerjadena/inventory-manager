@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.inventorymanager.R
 import com.example.inventorymanager.data.local.ProductDatabase
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.network.NetworkModule
 import com.example.inventorymanager.data.repository.ProductRepository
 import com.example.inventorymanager.databinding.FragmentProductByCategoryBinding
@@ -46,7 +47,13 @@ class ProductByCategoryFragment : Fragment() {
         setupClickListeners()
         observeViewModel()
 
-        viewModel.loadProductsByCategory(category)
+        // Create a Category object from the slug string
+        val categoryObject = Category(
+            slug = category,
+            name = category.replaceFirstChar { it.uppercase() },
+            url = ""
+        )
+        viewModel.loadProductsByCategory(categoryObject)
     }
 
     private fun setupViewModel() {
@@ -91,7 +98,7 @@ class ProductByCategoryFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.currentCategory.observe(viewLifecycleOwner) { category ->
-            binding.textCategoryTitle.text = category.replaceFirstChar { it.uppercase() }
+            binding.textCategoryTitle.text = category.name
         }
 
         viewModel.products.observe(viewLifecycleOwner) { products ->

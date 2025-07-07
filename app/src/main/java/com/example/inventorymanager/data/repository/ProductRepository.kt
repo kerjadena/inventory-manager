@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.inventorymanager.data.api.ApiService
 import com.example.inventorymanager.data.local.ProductDao
 import com.example.inventorymanager.data.model.AddProductRequest
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.model.Product
 import com.example.inventorymanager.data.model.ProductResponse
 import com.example.inventorymanager.data.model.UpdateProductRequest
@@ -22,12 +23,12 @@ class ProductRepository(
         return apiService.getProductById(id)
     }
 
-    suspend fun getCategories(): Response<List<String>> {
+    suspend fun getCategories(): Response<List<Category>> {
         return apiService.getCategories()
     }
 
-    suspend fun getProductsByCategory(category: String): Response<ProductResponse> {
-        return apiService.getProductsByCategory(category)
+    suspend fun getProductsByCategory(category: Category): Response<ProductResponse> {
+        return apiService.getProductsByCategory(category.slug)
     }
 
     suspend fun searchProducts(query: String): Response<ProductResponse> {
@@ -69,4 +70,3 @@ class ProductRepository(
         return productDao.getProductById(productId)?.isFavorite ?: false
     }
 }
-

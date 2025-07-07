@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.model.Product
 import com.example.inventorymanager.data.model.UpdateProductRequest
 import com.example.inventorymanager.data.repository.ProductRepository
@@ -25,8 +26,8 @@ class ProductEditViewModel : ViewModel() {
     private val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> = _success
 
-    private val _categories = MutableLiveData<List<String>>()
-    val categories: LiveData<List<String>> = _categories
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>> = _categories
 
     fun initRepository(repo: ProductRepository) {
         repository = repo

@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.databinding.ItemCategoryBinding
 
 class CategoryListAdapter(
-    private val onCategoryClick: (String) -> Unit
-) : ListAdapter<String, CategoryListAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
+    private val onCategoryClick: (Category) -> Unit
+) : ListAdapter<Category, CategoryListAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding = ItemCategoryBinding.inflate(
@@ -26,9 +27,9 @@ class CategoryListAdapter(
         private val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(category: String) {
+        fun bind(category: Category) {
             binding.apply {
-                textCategoryName.text = category.replaceFirstChar { it.uppercase() }
+                textCategoryName.text = category.name
 
                 root.setOnClickListener {
                     onCategoryClick(category)
@@ -37,12 +38,12 @@ class CategoryListAdapter(
         }
     }
 
-    private class CategoryDiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    private class CategoryDiffCallback : DiffUtil.ItemCallback<Category>() {
+        override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+            return oldItem.slug == newItem.slug
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem == newItem
         }
     }

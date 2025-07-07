@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.inventorymanager.R
 import com.example.inventorymanager.data.local.ProductDatabase
+import com.example.inventorymanager.data.model.Category
+import com.example.inventorymanager.data.model.Product
 import com.example.inventorymanager.data.network.NetworkModule
 import com.example.inventorymanager.data.repository.ProductRepository
 import com.example.inventorymanager.databinding.FragmentProductEditBinding
@@ -119,11 +122,12 @@ class ProductEditFragment : Fragment() {
         }
     }
 
-    private fun setupCategorySpinner(categories: List<String>) {
+    private fun setupCategorySpinner(categories: List<Category>) {
+        val categoryNames = categories.map { it.name }
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            categories
+            categoryNames
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = adapter
@@ -138,7 +142,12 @@ class ProductEditFragment : Fragment() {
             val description = editDescription.text.toString().takeIf { it.isNotBlank() }
             val price = editPrice.text.toString().takeIf { it.isNotBlank() }
             val brand = editBrand.text.toString().takeIf { it.isNotBlank() }
-            val category = spinnerCategory.selectedItem?.toString()?.takeIf { it.isNotBlank() }
+            val selectedPosition = spinnerCategory.selectedItemPosition
+            val category = if (selectedPosition >= 0 && viewModel.categories.value != null) {
+                viewModel.categories.value!![selectedPosition].slug
+            } else {
+                null
+            }
 
             viewModel.updateProduct(productId, title, description, price, brand, category)
         }

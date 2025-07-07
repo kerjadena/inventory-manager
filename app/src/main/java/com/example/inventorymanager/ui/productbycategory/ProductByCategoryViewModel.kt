@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.inventorymanager.data.model.Category
 import com.example.inventorymanager.data.model.Product
 import com.example.inventorymanager.data.repository.ProductRepository
 import kotlinx.coroutines.launch
@@ -21,14 +22,14 @@ class ProductByCategoryViewModel : ViewModel() {
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    private val _currentCategory = MutableLiveData<String>()
-    val currentCategory: LiveData<String> = _currentCategory
+    private val _currentCategory = MutableLiveData<Category>()
+    val currentCategory: LiveData<Category> = _currentCategory
 
     fun initRepository(repo: ProductRepository) {
         repository = repo
     }
 
-    fun loadProductsByCategory(category: String) {
+    fun loadProductsByCategory(category: Category) {
         if (!::repository.isInitialized) return
 
         _currentCategory.value = category
