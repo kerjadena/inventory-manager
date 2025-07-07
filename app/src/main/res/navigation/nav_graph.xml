@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productListFragment">
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.inventorymanager.ui.fragments.ProductListFragment"
+        android:label="Product List">
+        <action
+            android:id="@+id/action_productList_to_addProduct"
+            app:destination="@id/productAddFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productAddFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentProductAdd"
+        android:label="Add Product" />
+
+    <fragment
+        android:id="@+id/favoriteProductFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentFavoriteProduct"
+        android:label="Favorite Products" />
+</navigation>
