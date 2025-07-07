@@ -3,10 +3,20 @@
     <item
         android:id="@+id/productListFragment"
         android:icon="@drawable/ic_list"
-        android:title="Products" />
+        android:title="@string/menu_products" />
+
+    <item
+        android:id="@+id/categoryListFragment"
+        android:icon="@drawable/ic_category"
+        android:title="@string/menu_categories" />
+
+    <item
+        android:id="@+id/productSearchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/menu_search" />
+
     <item
         android:id="@+id/favoriteProductFragment"
         android:icon="@drawable/ic_favorite"
-        android:title="Favorites" />
+        android:title="@string/menu_favorites" />
 </menu>
-

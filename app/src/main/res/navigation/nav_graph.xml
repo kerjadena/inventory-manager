@@ -4,6 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/productListFragment">
 
+    <!-- Main Bottom Navigation Destinations -->
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.inventorymanager.ui.fragments.ProductListFragment"
@@ -11,15 +12,61 @@
         <action
             android:id="@+id/action_productList_to_addProduct"
             app:destination="@id/productAddFragment" />
+        <action
+            android:id="@+id/action_productList_to_productDetail"
+            app:destination="@id/productDetailFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentCategoryList"
+        android:label="Categories">
+        <action
+            android:id="@+id/action_categoryList_to_productsByCategory"
+            app:destination="@id/productsByCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productSearchFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentProductSearch"
+        android:label="Search Products">
+        <action
+            android:id="@+id/action_search_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteProductFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentFavoriteProduct"
+        android:label="Favorite Products" />
+
+    <!-- Secondary Destinations -->
     <fragment
         android:id="@+id/productAddFragment"
         android:name="com.example.inventorymanager.ui.fragments.FragmentProductAdd"
         android:label="Add Product" />
 
     <fragment
-        android:id="@+id/favoriteProductFragment"
-        android:name="com.example.inventorymanager.ui.fragments.FragmentFavoriteProduct"
-        android:label="Favorite Products" />
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentProductDetail"
+        android:label="Product Detail">
+        <action
+            android:id="@+id/action_productDetail_to_editProduct"
+            app:destination="@id/productEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productEditFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentProductEdit"
+        android:label="Edit Product" />
+
+    <fragment
+        android:id="@+id/productsByCategoryFragment"
+        android:name="com.example.inventorymanager.ui.fragments.FragmentProductByCategory"
+        android:label="Products by Category">
+        <action
+            android:id="@+id/action_productsByCategory_to_productDetail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
 </navigation>

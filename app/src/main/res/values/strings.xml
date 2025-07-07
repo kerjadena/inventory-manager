@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
+    <string name="menu_products">Products</string>
+    <string name="menu_categories">Categories</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="add_product">Add Product</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="search_products">Search Products</string>
+    <string name="no_products_found">No products found</string>
+    <string name="no_categories_found">No categories found</string>
+    <string name="no_search_results">No search results found</string>
+    <string name="network_error">Network error. Please check your connection.</string>
+    <string name="loading">Loading...</string>
 </resources>

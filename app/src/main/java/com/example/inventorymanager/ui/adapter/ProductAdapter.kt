@@ -5,10 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.inventorymanager.R
 import com.example.inventorymanager.databinding.ItemProductBinding
 import com.example.inventorymanager.model.Product
 
-class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
+class ProductAdapter(
+    private val onItemClick: (Product) -> Unit = {},
+    private val onFavoriteClick: (Product) -> Unit = {}
+) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ItemProductBinding.inflate(
@@ -23,7 +28,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(Pr
         holder.bind(getItem(position))
     }
 
-    class ProductViewHolder(private val binding: ItemProductBinding) :
+    inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -31,6 +36,21 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(Pr
                 textProductName.text = product.title
                 textProductPrice.text = "$ ${product.price}"
                 textProductDescription.text = product.description
+
+                // Load product image using Glide
+                if (product.imageUrl.isNotEmpty()) {
+                    Glide.with(itemView.context)
+                        .load(product.imageUrl)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(imageProduct)
+                } else {
+                    imageProduct.setImageResource(R.drawable.ic_launcher_foreground)
+                }
+
+                // Set click listeners
+                root.setOnClickListener { onItemClick(product) }
+                btnFavorite.setOnClickListener { onFavoriteClick(product) }
             }
         }
     }

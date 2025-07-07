@@ -36,7 +36,8 @@ class FragmentFavoriteProduct : Fragment() {
     private fun setupRecyclerView() {
         productAdapter = ProductAdapter()
         binding.recyclerViewFavorites.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            // Use context from binding root instead of requireContext()
+            layoutManager = LinearLayoutManager(binding.root.context)
             adapter = productAdapter
         }
     }

@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.inventorymanager.model.Product
 
-@Database(entities = [Product::class], version = 1, exportSchema = false)
+@Database(entities = [Product::class], version = 2, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
@@ -21,7 +23,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "inventory_db"
-                ).build()
+                )
+                .fallbackToDestructiveMigration() // Handle schema changes
+                .build()
                 INSTANCE = instance
                 instance
             }

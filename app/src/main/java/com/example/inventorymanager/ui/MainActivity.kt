@@ -23,9 +23,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(navController)
+        try {
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+
+            if (navHostFragment != null) {
+                val navController = navHostFragment.navController
+                binding.bottomNavigation.setupWithNavController(navController)
+            } else {
+                // Log error or handle case where NavHostFragment is not found
+                // You could also try to find it after a delay or in onResume
+                throw IllegalStateException("NavHostFragment not found")
+            }
+        } catch (e: Exception) {
+            // Handle the exception gracefully
+            e.printStackTrace()
+            // Optionally, you could retry after a short delay or in onResume
+        }
     }
 }

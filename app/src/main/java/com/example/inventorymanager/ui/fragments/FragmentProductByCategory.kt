@@ -13,14 +13,14 @@ import com.example.inventorymanager.R
 import com.example.inventorymanager.databinding.FragmentProductListBinding
 import com.example.inventorymanager.ui.adapters.ProductAdapter
 import com.example.inventorymanager.viewmodel.ProductViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ProductListFragment : Fragment() {
+class FragmentProductByCategory : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
     private val productViewModel: ProductViewModel by activityViewModels()
     private lateinit var productAdapter: ProductAdapter
+    private var category: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +33,14 @@ class ProductListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        category = arguments?.getString("category")
+
         setupRecyclerView()
         setupObservers()
-        loadProducts()
 
-        view.findViewById<FloatingActionButton>(R.id.fabAddProduct).setOnClickListener {
-            findNavController().navigate(R.id.action_productList_to_addProduct)
+        category?.let {
+            productViewModel.getProductsByCategory(it)
         }
     }
 
@@ -46,21 +48,24 @@ class ProductListFragment : Fragment() {
         productAdapter = ProductAdapter(
             onItemClick = { product ->
                 productViewModel.setSelectedProduct(product)
-                findNavController().navigate(R.id.action_productList_to_productDetail)
+                findNavController().navigate(R.id.action_productsByCategory_to_productDetail)
             },
             onFavoriteClick = { product ->
                 productViewModel.addToFavorites(product)
-                Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+                // Safe context check to prevent IllegalException
+                context?.let { ctx ->
+                    Toast.makeText(ctx, "Added to favorites", Toast.LENGTH_SHORT).show()
+                }
             }
         )
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            // Use context from binding root instead of requireContext()
+            layoutManager = LinearLayoutManager(binding.root.context)
             adapter = productAdapter
         }
     }
 
     private fun setupObservers() {
-        // Observe products from API
         productViewModel.products.observe(viewLifecycleOwner) { products ->
             binding.progressBar.visibility = View.GONE
             if (products.isNotEmpty()) {
@@ -73,18 +78,15 @@ class ProductListFragment : Fragment() {
             }
         }
 
-        // Observe errors
         productViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                // Safe context check to prevent IllegalException
+                context?.let { ctx ->
+                    Toast.makeText(ctx, it, Toast.LENGTH_LONG).show()
+                }
             }
         }
-    }
-
-    private fun loadProducts() {
-        binding.progressBar.visibility = View.VISIBLE
-        productViewModel.getAllProducts(limit = 20, skip = 0)
     }
 
     override fun onDestroyView() {

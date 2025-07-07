@@ -48,7 +48,7 @@ class FragmentProductAdd : Fragment() {
             category = binding.edCategory.text.toString()
         )
 
-        productViewModel.addToFavorites(product)
+        productViewModel.addProduct(product)
         findNavController().navigateUp()
     }
 

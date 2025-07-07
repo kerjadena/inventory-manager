@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.inventorymanager.databinding.FragmentHomeBinding
-import com.example.inventorymanager.ui.adapter.ProductAdapter
+import com.example.inventorymanager.ui.adapters.ProductAdapter
 import com.example.inventorymanager.viewmodel.ProductViewModel
 
 class HomeFragment : Fragment() {
@@ -36,7 +36,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ProductAdapter()
+        adapter = ProductAdapter(
+            onItemClick = { product ->
+                // Navigate to product detail when item is clicked
+                viewModel.setSelectedProduct(product)
+                // Add navigation here if needed
+            },
+            onFavoriteClick = { product ->
+                viewModel.addToFavorites(product)
+                Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+            }
+        )
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@HomeFragment.adapter
@@ -44,7 +54,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.remoteProducts.observe(viewLifecycleOwner) { products ->
+        viewModel.products.observe(viewLifecycleOwner) { products ->
             adapter.submitList(products)
             binding.progressBar.visibility = View.GONE
         }
